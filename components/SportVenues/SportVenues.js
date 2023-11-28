@@ -1,6 +1,5 @@
 import SportVenuePreview from "../SportVenuePreview/SportVenuePreview";
 import styled from "styled-components";
-import createGlobalStyle from "@/styles/styles";
 
 const List = styled.ul`
   list-style-type: none;
@@ -14,10 +13,13 @@ const List = styled.ul`
 // const MainContainer = styled.div`
 // `;
 
-export default function SportVenues({ venues }) {
+export default function SportVenues({
+  venues,
+  favorites,
+  handleToggleFavorite,
+}) {
   return (
     <div>
-      <h1>My Sports App</h1>
       <List>
         {venues.map((venue) => (
           <li key={venue.id}>
@@ -27,6 +29,10 @@ export default function SportVenues({ venues }) {
               id={venue.id}
               venueDistrict={venue.district}
               venueCategory={venue.category}
+              handleToggleFavorite={handleToggleFavorite}
+              isFavorite={favorites?.find(
+                (favorite) => favorite.id === venue.id && favorite.isFavorite
+              )}
             />
           </li>
         ))}
