@@ -1,4 +1,6 @@
 import "@/styles/styles";
+import Layout from "../../components/Layout/Layout";
+import { GlobalStyle } from "@/styles/styles";
 
 export default function App({ Component, pageProps }) {
   const venues = [
@@ -44,5 +46,11 @@ export default function App({ Component, pageProps }) {
     },
   ];
 
-  return <Component {...pageProps} venues={venues} />;
+  return (
+    <>
+      <GlobalStyle />
+      <Component {...pageProps} venues={venues} />
+      <Layout />
+    </>
+  );
 }

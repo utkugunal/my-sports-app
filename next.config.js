@@ -1,16 +1,25 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // images: {
+  //   domains: [
+  //     "example-apis.vercel.app",
+  //     "lh3.googleusercontent.com",
+  //     "assets-global.website-files.com",
+  //     "www.clever-fit.com",
+  //     "www.berlinerbaeder.de",
+  //     "beachmitte.de",
+  //   ],
   images: {
-    domains: [
-      "example-apis.vercel.app",
-      "lh3.googleusercontent.com",
-      "assets-global.website-files.com",
-      "www.clever-fit.com",
-      "www.berlinerbaeder.de",
-      "beachmitte.de",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+        port: "",
+      },
     ],
   },
+
   compiler: {
     styledComponents: true,
   },

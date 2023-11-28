@@ -1,5 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
+import styled from "styled-components";
+
+const Figure = styled.figure`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 60px;
+`;
 
 export default function SportVenuePreview({
   image,
@@ -9,8 +16,7 @@ export default function SportVenuePreview({
   venueCategory,
 }) {
   return (
-    <figure>
-      <button></button>
+    <Figure>
       <Link href={`/sport-venues/${id}`}>
         <Image src={image} alt={venueName} height={100} width={200}></Image>
       </Link>
@@ -19,6 +25,6 @@ export default function SportVenuePreview({
         <br></br>
         {venueCategory} in {venueDistrict}
       </figcaption>
-    </figure>
+    </Figure>
   );
 }

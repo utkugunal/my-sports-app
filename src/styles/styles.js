@@ -1,6 +1,7 @@
+import React from "react";
 import { createGlobalStyle } from "styled-components";
 
-export default createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   *,
   *::before,
   *::after {
@@ -10,5 +11,10 @@ export default createGlobalStyle`
   body {
     margin: 0;
     font-family: system-ui;
+  }
+
+  h1 {
+    font-family: system-ui;
+    text-align: center;
   }
 `;
