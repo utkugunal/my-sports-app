@@ -1,6 +1,7 @@
 import "@/styles/styles";
 import Layout from "../../components/Layout/Layout";
 import { GlobalStyle } from "@/styles/styles";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function App({ Component, pageProps }) {
   const venues = [
@@ -46,10 +47,38 @@ export default function App({ Component, pageProps }) {
     },
   ];
 
+  const [favoriteInfo, setFavoriteInfo] = useLocalStorageState("favoriteInfo", {
+    defaultValue: [],
+  });
+
+  function handleToggleFavorite(id) {
+    console.log("id in the handleToggleFavorite function", id);
+    setFavoriteInfo((favoriteInfo) => {
+      const info = favoriteInfo.find((info) => info.id === id);
+      console.log("favoriteInfo.find((info) => info.id === id): ", info);
+      if (info) {
+        return favoriteInfo.map((info) =>
+          info.id === id ? { ...info, isFavorite: !info.isFavorite } : info
+        );
+      }
+      console.log("[...favoriteInfo, { id: id, isFavorite: true }]:", [
+        ...favoriteInfo,
+        { id: id, isFavorite: true },
+      ]);
+      return [...favoriteInfo, { id: id, isFavorite: true }];
+    });
+  }
+
   return (
     <>
       <GlobalStyle />
-      <Component {...pageProps} venues={venues} />
+      <h1>My Sports App</h1>
+      <Component
+        {...pageProps}
+        venues={venues}
+        handleToggleFavorite={handleToggleFavorite}
+        favorites={favoriteInfo}
+      />
       <Layout />
     </>
   );
