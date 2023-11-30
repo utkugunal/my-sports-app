@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
   if (isLoading) return <div>loading...</div>;
   if (!data) return;
 
-  console.log(data);
+  console.log("data from the fetch:", data);
 
   function handleToggleFavorite(id) {
     console.log("id in the handleToggleFavorite function", id);
@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }) {
       return [...favoriteInfo, { id: id, isFavorite: true }];
     });
   }
-  console.log(favoriteInfo);
+  console.log("favoriteInfo state:", favoriteInfo);
   return (
     <SWRConfig
       value={{

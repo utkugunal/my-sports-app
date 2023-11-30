@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 
 const Figure = styled.figure`
@@ -25,8 +25,8 @@ export default function SportVenuePreview({
         onToggle={handleToggleFavorite}
         isFavorite={isFavorite}
       />
-      <Link href={`/sport-venues/${id}`}>
-        <Image src={image} alt={venueName} height={100} width={200}></Image>
+      <Link href={`/venues/${id}`}>
+        <Image src={image} alt={venueName} width={200} height={100}></Image>
       </Link>
       <figcaption>
         {venueName}
