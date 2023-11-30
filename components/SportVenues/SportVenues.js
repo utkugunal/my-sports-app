@@ -18,7 +18,6 @@ export default function SportVenues({
   favorites,
   handleToggleFavorite,
 }) {
-  console.log(venues);
   return (
     <div>
       <List>
