@@ -10,6 +10,10 @@ const nextConfig = {
   //     "www.berlinerbaeder.de",
   //     "beachmitte.de",
   //   ],
+
+  //To be able to use the images from different sources on the Internet, first I had to add related domains (hostnames) into this file
+  // And then I proceeded with the following solution allowing any domain to be used
+
   images: {
     remotePatterns: [
       {
