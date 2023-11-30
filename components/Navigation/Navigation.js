@@ -23,9 +23,7 @@ export default function Navigation() {
   return (
     <NavBar>
       <StyledLink href={"/my-progress"}>MyP</StyledLink>
-      <StyledLink href={"/add-venue"}>Add</StyledLink>
       <StyledLink href={"/"}>Home</StyledLink>
-      <StyledLink href={"/map"}>Map</StyledLink>
       <StyledLink href={"/favorites"}>Fav</StyledLink>
     </NavBar>
   );

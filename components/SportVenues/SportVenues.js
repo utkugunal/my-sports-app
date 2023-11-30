@@ -18,20 +18,21 @@ export default function SportVenues({
   favorites,
   handleToggleFavorite,
 }) {
+  console.log(venues);
   return (
     <div>
       <List>
         {venues.map((venue) => (
-          <li key={venue.id}>
+          <li key={venue._id}>
             <SportVenuePreview
               image={venue.imageURL}
               venueName={venue.name}
-              id={venue.id}
+              id={venue._id}
               venueDistrict={venue.district}
               venueCategory={venue.category}
               handleToggleFavorite={handleToggleFavorite}
               isFavorite={favorites?.find(
-                (favorite) => favorite.id === venue.id && favorite.isFavorite
+                (favorite) => favorite.id === venue._id && favorite.isFavorite
               )}
             />
           </li>

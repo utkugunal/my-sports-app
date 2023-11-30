@@ -18,7 +18,7 @@ export default function FavoritesPage({
   const selectedVenues = [];
 
   for (let favorite of filteredFavorites) {
-    const selectedVenue = venues.find((venue) => venue.id === favorite.id);
+    const selectedVenue = venues.find((venue) => venue._id === favorite.id);
 
     if (selectedVenue) {
       selectedVenues.push(selectedVenue);
