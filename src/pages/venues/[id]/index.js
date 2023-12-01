@@ -2,6 +2,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import SportVenuePreview from "../../../../components/SportVenuePreview/SportVenuePreview";
+import Image from "next/image";
+import Comments from "../../../../components/Comments/Comments";
 
 export default function DetailsPage({ handleToggleFavorite, favorites }) {
   const router = useRouter();
@@ -10,10 +12,6 @@ export default function DetailsPage({ handleToggleFavorite, favorites }) {
   const { data: venue, isLoading, error } = useSWR(`/api/venues/${id}`);
 
   if (!isReady || isLoading || error) return <h2>Loading...</h2>;
-
-  // find a way to make the image size bigger on the details pages. use the following link:
-  // https://github.com/spiced-academy/lime-web-dev/blob/main/sessions/react-styled-components/react-styled-components.md
-  // logic would be: if there there is an id on the route then put the bigger size etc.
 
   return (
     <>
@@ -28,7 +26,18 @@ export default function DetailsPage({ handleToggleFavorite, favorites }) {
         isFavorite={favorites?.find(
           (favorite) => favorite.id === venue._id && favorite.isFavorite
         )}
+        imageSize={{ width: 400, height: 200 }}
       />
+      <div>
+        <p>Get direction: </p>
+        <Image
+          src="/map-of-berlin.png"
+          alt="map-of-berlin"
+          width={200}
+          height={100}
+        ></Image>
+      </div>
+      <Comments />
     </>
   );
 }
