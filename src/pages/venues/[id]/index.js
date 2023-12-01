@@ -9,9 +9,11 @@ export default function DetailsPage({ handleToggleFavorite, favorites }) {
   const router = useRouter();
   const { isReady } = router;
   const { id } = router.query;
-  const { data: venue, isLoading, error } = useSWR(`/api/venues/${id}`);
+  const { data, isLoading, error } = useSWR(`/api/venues/${id}`);
 
   if (!isReady || isLoading || error) return <h2>Loading...</h2>;
+
+  const { venue, comments } = data;
 
   return (
     <>
@@ -37,7 +39,7 @@ export default function DetailsPage({ handleToggleFavorite, favorites }) {
           height={100}
         ></Image>
       </div>
-      <Comments />
+      <Comments comments={comments} />
     </>
   );
 }
