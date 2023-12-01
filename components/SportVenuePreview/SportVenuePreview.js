@@ -17,6 +17,7 @@ export default function SportVenuePreview({
   venueCategory,
   handleToggleFavorite,
   isFavorite,
+  imageSize = { width: 200, height: 100 }, // apparently it is possible to create a prop as an object...
 }) {
   return (
     <Figure>
@@ -26,7 +27,12 @@ export default function SportVenuePreview({
         isFavorite={isFavorite}
       />
       <Link href={`/venues/${id}`}>
-        <Image src={image} alt={venueName} width={200} height={100}></Image>
+        <Image
+          src={image}
+          alt={venueName}
+          width={imageSize.width}
+          height={imageSize.height}
+        ></Image>
       </Link>
       <figcaption>
         {venueName}
