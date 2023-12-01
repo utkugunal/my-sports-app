@@ -21,6 +21,7 @@ export default function Comments() {
     if (response.ok) {
       mutate();
     }
+    e.target.reset();
   }
 
   return (
