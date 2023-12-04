@@ -16,5 +16,6 @@ export const GlobalStyle = createGlobalStyle`
   h1 {
     font-family: system-ui;
     text-align: center;
+    font-size: 1.5rem;
   }
 `;
