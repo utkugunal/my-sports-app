@@ -3,8 +3,9 @@ import Layout from "../../components/Layout/Layout";
 import { GlobalStyle } from "@/styles/styles";
 import useLocalStorageState from "use-local-storage-state";
 import useSWR, { SWRConfig } from "swr";
+import { SessionProvider } from "next-auth/react";
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps, session }) {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, isLoading, error } = useSWR("/api/venues", fetcher);
 
@@ -33,21 +34,23 @@ export default function App({ Component, pageProps }) {
   }
   console.log("favoriteInfo state:", favoriteInfo);
   return (
-    <SWRConfig
-      value={{
-        fetcher,
-        refreshInterval: 1000,
-      }}
-    >
-      <Layout>
-        <GlobalStyle />
-        <Component
-          {...pageProps}
-          venues={data}
-          handleToggleFavorite={handleToggleFavorite}
-          favorites={favoriteInfo}
-        />
-      </Layout>
-    </SWRConfig>
+    <SessionProvider session={session}>
+      <SWRConfig
+        value={{
+          fetcher,
+          refreshInterval: 1000,
+        }}
+      >
+        <Layout>
+          <GlobalStyle />
+          <Component
+            {...pageProps}
+            venues={data}
+            handleToggleFavorite={handleToggleFavorite}
+            favorites={favoriteInfo}
+          />
+        </Layout>
+      </SWRConfig>
+    </SessionProvider>
   );
 }
