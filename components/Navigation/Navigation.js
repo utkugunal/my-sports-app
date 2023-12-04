@@ -2,7 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 
 const NavBar = styled.nav`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   display: flex;
   justify-content: space-evenly;
   position: fixed;
