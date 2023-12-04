@@ -1,5 +1,26 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import styled from "styled-components";
+
+const Form = styled.form`
+  margin-left: 40px;
+`;
+
+const List = styled.ul`
+  list-style-type: none;
+  margin-bottom: 40px;
+`;
+
+const ListItem = styled.li`
+  margin-left: 20px;
+  margin-top: 5px;
+`;
+
+const NoCommentListItem = styled(ListItem)`
+  text-align: center;
+  margin-left: 100px;
+  font-style: italic;
+`;
 
 export default function Comments({ comments }) {
   const router = useRouter();
@@ -34,25 +55,33 @@ export default function Comments({ comments }) {
 
   return (
     <div>
-      {comments && (
-        <>
-          <ul>
-            Comments:
-            {comments.map((comElement) => (
-              <li key={comElement._id}>
-                {comElement.username}: {comElement.comment} - {formattedDate}
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
-      <form onSubmit={handleSubmitComment}>
-        <label htmlFor="username">Your name: </label>
-        <input type="text" name="username"></input>
-        <label htmlFor="comment">Add comment: </label>
-        <input type="text" name="comment"></input>
+      <>
+        <List>
+          Comments:
+          {comments && comments.length > 0 ? (
+            comments.map((comElement) => (
+              <ListItem key={comElement._id}>
+                {comElement.username}: "{comElement.comment}"{" "}
+                <span style={{ fontStyle: "italic" }}>({formattedDate})</span>
+              </ListItem>
+            ))
+          ) : (
+            <NoCommentListItem>There is no comment yet.</NoCommentListItem>
+          )}
+        </List>
+      </>
+
+      <Form onSubmit={handleSubmitComment}>
+        <div>
+          <label htmlFor="username">Your name: </label>
+          <input type="text" name="username"></input>
+        </div>
+        <div>
+          <label htmlFor="comment">Add comment: </label>
+          <input type="text" name="comment"></input>
+        </div>
         <button type="submit">Add</button>
-      </form>
+      </Form>
     </div>
   );
 }
