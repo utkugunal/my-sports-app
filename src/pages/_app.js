@@ -4,6 +4,7 @@ import { GlobalStyle } from "@/styles/styles";
 import useLocalStorageState from "use-local-storage-state";
 import useSWR, { SWRConfig } from "swr";
 import { SessionProvider } from "next-auth/react";
+import DemoApp from "../../components/Calendar/DemoApp";
 
 export default function App({ Component, pageProps, session }) {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -12,6 +13,13 @@ export default function App({ Component, pageProps, session }) {
   const [favoriteInfo, setFavoriteInfo] = useLocalStorageState("favoriteInfo", {
     defaultValue: [],
   });
+
+  // const [currentEvents, setCurrentEvents] = useLocalStorageState(
+  //   "eventStorage",
+  //   {
+  //     defaultValue: [],
+  //   }
+  // );
 
   if (error) return <div>{error.message}</div>;
   if (isLoading) return <div>loading...</div>;
@@ -48,6 +56,8 @@ export default function App({ Component, pageProps, session }) {
             venues={data}
             handleToggleFavorite={handleToggleFavorite}
             favorites={favoriteInfo}
+            // currentEvents={currentEvents}
+            // setCurrentEvents={setCurrentEvents}
           />
         </Layout>
       </SWRConfig>
