@@ -4,7 +4,6 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-// import { INITIAL_EVENTS, createEventId } from "./event-utils";
 import "@/styles/styles";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
@@ -16,24 +15,24 @@ export default function DemoApp() {
   const { data: session } = useSession();
   const { data: record, isLoading, error, mutate } = useSWR(`/api/calendar`);
 
+  useEffect(() => {
+    if (record) {
+      const maxEventId = Math.max(
+        ...record.map((event) => parseInt(event.id, 10)),
+        0
+      );
+      setEventGuid(maxEventId + 1);
+    }
+  }, [record]);
+
   if (isLoading || error) return <h2>Loading...</h2>;
 
-  console.log(record);
-
-  let todayStr = new Date().toISOString().replace(/T.*$/, ""); // YYYY-MM-DD of today
-  const INITIAL_EVENTS = [
-    {
-      id: "87878",
-      title: "Test Event",
-      start: todayStr,
-    },
-  ];
+  console.log("record variable: ", record);
 
   function createEventId() {
     setEventGuid((prevGuid) => prevGuid + 1);
     return String(eventGuid);
   }
-
   async function handleDateSelect(selectInfo) {
     let title = prompt("Please enter a new title for your event");
     let calendarApi = selectInfo.view.calendar;
@@ -49,15 +48,15 @@ export default function DemoApp() {
         end: selectInfo.endStr,
         allDay: selectInfo.allDay,
       });
-      console.log("this item is added: ", title);
-      console.log("start time of the added item: ", selectInfo.startStr);
-      console.log("this eventID is added: ", eventID);
+      console.log("this title is added: ", title);
+      console.log("start time of the entered title: ", selectInfo.startStr);
+      console.log("this id is added: ", eventID);
 
       let input = {
-        userEmail: session.user.email,
-        eventName: title,
-        eventID: eventID,
-        eventDate: selectInfo.startStr,
+        userEmail: session?.user.email || "N/A",
+        title: title,
+        id: eventID,
+        start: selectInfo.startStr,
       };
       const response = await fetch("/api/calendar", {
         method: "POST",
@@ -72,18 +71,18 @@ export default function DemoApp() {
       }
     }
   }
-  const handleEventClick = (clickInfo) => {
+  async function handleEventClick(clickInfo) {
     if (
       confirm(
         `Are you sure you want to delete the event '${clickInfo.event.title}'`
       )
     ) {
       console.log("this event is removed: ", clickInfo.event.title);
-      console.log("this eventID is removed: ", clickInfo.event.id);
+      console.log("this id is removed: ", clickInfo.event.id);
 
       clickInfo.event.remove();
     }
-  };
+  }
 
   function handleEvents(events) {
     setCurrentEvents(events);
@@ -114,9 +113,12 @@ export default function DemoApp() {
       <div className="demo-app-sidebar-section">
         <h2>Instructions</h2>
         <ul>
-          <li>Select a date to create a new event</li>
-          <li>Drag, drop, and resize events</li>
-          <li>Click an event to delete it</li>
+          <li>
+            Select a date to <b>add</b>a new event
+          </li>
+          <li>
+            Click an event to <b>delete</b>it
+          </li>
         </ul>
       </div>
       <div className="demo-app-sidebar-section">
@@ -138,11 +140,12 @@ export default function DemoApp() {
             right: "today",
           }}
           initialView="dayGridMonth"
-          editable={true}
+          editable={false}
+          firstDay={1}
           selectable={true}
           selectMirror={true}
           dayMaxEvents={true}
-          initialEvents={INITIAL_EVENTS}
+          initialEvents={record}
           select={handleDateSelect}
           eventContent={renderEventContent}
           eventClick={handleEventClick}

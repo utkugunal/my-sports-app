@@ -12,7 +12,7 @@ import DemoApp from "../../../components/Calendar/DemoApp";
 export default function DemoPage() {
   return (
     <>
-      <DemoApp />;
+      <DemoApp />
     </>
   );
 }
