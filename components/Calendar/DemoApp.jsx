@@ -77,12 +77,42 @@ export default function DemoApp() {
         `Are you sure you want to delete the event '${clickInfo.event.title}'`
       )
     ) {
-      console.log("this event is removed: ", clickInfo.event.title);
-      console.log("this id is removed: ", clickInfo.event.id);
-
-      clickInfo.event.remove();
+      try {
+        const response = await fetch(`/api/calendar/${clickInfo.event.id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          console.log(
+            "Event deleted successfully from the database. Deleted id: ",
+            clickInfo.event.id
+          );
+          // Remove the event from the calendar
+          clickInfo.event.remove();
+        } else {
+          console.error("Failed to delete the event from the database.");
+        }
+      } catch (error) {
+        console.error("An error occurred while deleting the event:", error);
+      }
     }
   }
+
+  // function handleEventClick(clickInfo) {
+  //   if (
+  //     confirm(
+  //       `Are you sure you want to delete the event '${clickInfo.event.title}'`
+  //     )
+  //   ) {
+  //     console.log(
+  //       "Event deleted successfully from the database. Deleted id: ",
+  //       clickInfo.event.id
+  //     );
+  //     clickInfo.event.remove();
+  //   }
+  // }
 
   function handleEvents(events) {
     setCurrentEvents(events);
