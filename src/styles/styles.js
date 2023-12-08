@@ -46,7 +46,7 @@ export const GlobalStyle = createGlobalStyle`
 
   b {
     /* used for event dates/times */
-    margin-right: 3px;
+    /* margin-right: 3px; */
   }
 
   .demo-app {
@@ -57,14 +57,14 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .demo-app-sidebar {
-    width: 300px;
+    width: 30%;
     line-height: 1.5;
     background: #eaf9ff;
     border-right: 1px solid #d3e2e8;
   }
 
   .demo-app-sidebar-section {
-    padding: 2em;
+    padding: 1.5em;
   }
 
   .demo-app-main {
@@ -76,6 +76,13 @@ export const GlobalStyle = createGlobalStyle`
     /* the calendar root */
     max-width: 1100px;
     margin: 0 auto;
-}
 
+  }
+
+  .fc-event {
+    border-color: #d3d3d3;
+    
+   
+
+  }
 `;
