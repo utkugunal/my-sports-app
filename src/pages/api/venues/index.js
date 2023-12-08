@@ -10,4 +10,16 @@ export default async function handler(request, response) {
     }
     return response.status(200).json(venues);
   }
+
+  if (request.method === "POST") {
+    try {
+      const newVenue = request.body;
+      await Venue.create(newVenue);
+
+      console.log("newVenue: ", newVenue);
+      return response.status(201).json(newVenue);
+    } catch (error) {
+      return response.status(400).json({ error: error.message });
+    }
+  }
 }

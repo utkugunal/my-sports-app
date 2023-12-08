@@ -176,9 +176,9 @@ export default function DemoApp() {
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
-            left: "prev next",
+            left: "prev today",
             center: "title",
-            right: "today",
+            right: "next",
           }}
           initialView="dayGridMonth"
           editable={false}

@@ -76,13 +76,9 @@ export const GlobalStyle = createGlobalStyle`
     /* the calendar root */
     max-width: 1100px;
     margin: 0 auto;
-
   }
 
   .fc-event {
     border-color: #d3d3d3;
-    
-   
-
   }
 `;
