@@ -7,13 +7,16 @@ import interactionPlugin from "@fullcalendar/interaction";
 import "@/styles/styles";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function DemoApp() {
   const [currentEvents, setCurrentEvents] = useState([]);
   const [eventGuid, setEventGuid] = useState(0);
 
   const { data: session } = useSession();
-  const { data: record, isLoading, error, mutate } = useSWR(`/api/calendar`);
+  const { data: record, isLoading, error, mutate } = useSWR(`/api/calendar/`);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (record) {
@@ -28,6 +31,9 @@ export default function DemoApp() {
   if (isLoading || error) return <h2>Loading...</h2>;
 
   console.log("record variable: ", record);
+
+  const recordMonthly = record?.filter((r) => r.start.startsWith("2023-12"));
+  console.log("====recordMonthly:", recordMonthly);
 
   function createEventId() {
     setEventGuid((prevGuid) => prevGuid + 1);
@@ -58,7 +64,7 @@ export default function DemoApp() {
         id: eventID,
         start: selectInfo.startStr,
       };
-      const response = await fetch("/api/calendar", {
+      const response = await fetch("/api/calendar/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,8 +72,10 @@ export default function DemoApp() {
         body: JSON.stringify(input),
       });
       console.log("INPUT!!!!!", input);
+
       if (response.ok) {
-        mutate();
+        await mutate(); // Wait for the mutate to complete
+        router.reload();
       }
     }
   }
@@ -89,6 +97,7 @@ export default function DemoApp() {
             "Event deleted successfully from the database. Deleted id: ",
             clickInfo.event._def.extendedProps._id
           );
+          console.log("==== clickInfo.event._def: ", clickInfo.event._def);
           // Remove the event from the calendar
           clickInfo.event.remove();
         } else {
@@ -100,30 +109,27 @@ export default function DemoApp() {
     }
   }
 
-  // function handleEventClick(clickInfo) {
-  //   if (
-  //     confirm(
-  //       `Are you sure you want to delete the event '${clickInfo.event.title}'`
-  //     )
-  //   ) {
-  //     console.log(
-  //       "Event deleted successfully from the database. Deleted id: ",
-  //       clickInfo.event._def.extendedProps._id
-  //     );
-  //     clickInfo.event.remove();
-  //   }
-  // }
-
   function handleEvents(events) {
     setCurrentEvents(events);
   }
 
-  const renderEventContent = (eventInfo) => (
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
-    </>
-  );
+  const renderEventContent = (eventInfo) => {
+    const titleToColor = {
+      Fitness: "#F82619",
+      Swimming: "#016EE4",
+      Yoga: "#149313",
+      "Beach Volley": "#DEBE09",
+    };
+
+    const backgroundColor = titleToColor[eventInfo.event.title] || "gray";
+    const eventStyle = { backgroundColor };
+
+    return (
+      <div style={eventStyle}>
+        <i>{eventInfo.event.title}</i>
+      </div>
+    );
+  };
 
   const renderSidebarEvent = (event) => (
     <li key={event.id}>
@@ -144,16 +150,21 @@ export default function DemoApp() {
         <h2>Instructions</h2>
         <ul>
           <li>
-            Select a date to <b>add</b>a new event
+            Select a date to <b>add</b> a new event.
           </li>
           <li>
-            Click an event to <b>delete</b>it
+            Click an event to <b>delete</b> it.
           </li>
         </ul>
       </div>
       <div className="demo-app-sidebar-section">
-        <h2>All Events ({currentEvents.length})</h2>
-        <ul>{currentEvents.map(renderSidebarEvent)}</ul>
+        {/* <h2>All Events ({currentEvents.length})</h2>
+        <ul>{currentEvents.map(renderSidebarEvent)}</ul> */}
+        <h2>My Progress</h2>
+
+        <li>
+          <b>{recordMonthly.length}</b> activities in <b>December</b> 2023.
+        </li>
       </div>
     </div>
   );

@@ -22,9 +22,4 @@ export default async function handler(request, response) {
       return response.status(400).json({ error: error.message });
     }
   }
-
-  if (request.method === "DELETE") {
-    await Event.findByIdAndDelete(id);
-    response.status(200).json({ status: `Event ${id} successfully deleted.` });
-  }
 }
