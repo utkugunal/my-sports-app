@@ -10,6 +10,7 @@ const Form = styled.form`
 const List = styled.ul`
   list-style-type: none;
   margin-bottom: 40px;
+  margin-left: 15px;
 `;
 
 const ListItem = styled.li`

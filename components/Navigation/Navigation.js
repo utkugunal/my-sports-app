@@ -22,7 +22,7 @@ const StyledLink = styled(Link)`
 export default function Navigation() {
   return (
     <NavBar>
-      <StyledLink href={"/my-progress"}>MyP</StyledLink>
+      <StyledLink href={"/calendar"}>MyP</StyledLink>
       <StyledLink href={"/"}>Home</StyledLink>
       <StyledLink href={"/favorites"}>Fav</StyledLink>
     </NavBar>

@@ -9,9 +9,10 @@ const SignInOutContainer = styled.div`
 
 const login = () => {
   const { data: session } = useSession();
-  console.log(session);
 
   if (session) {
+    console.log("session", session);
+    console.log("session.user", session.user);
     return (
       <SignInOutContainer>
         <p>Welcome {session.user.name}</p>
