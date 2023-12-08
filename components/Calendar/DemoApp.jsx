@@ -78,16 +78,16 @@ export default function DemoApp() {
       )
     ) {
       try {
-        const response = await fetch(`/api/calendar/${clickInfo.event.id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          `/api/calendar/${clickInfo.event._def.extendedProps._id}`,
+          {
+            method: "DELETE",
+          }
+        );
         if (response.ok) {
           console.log(
             "Event deleted successfully from the database. Deleted id: ",
-            clickInfo.event.id
+            clickInfo.event._def.extendedProps._id
           );
           // Remove the event from the calendar
           clickInfo.event.remove();
@@ -108,7 +108,7 @@ export default function DemoApp() {
   //   ) {
   //     console.log(
   //       "Event deleted successfully from the database. Deleted id: ",
-  //       clickInfo.event.id
+  //       clickInfo.event._def.extendedProps._id
   //     );
   //     clickInfo.event.remove();
   //   }
