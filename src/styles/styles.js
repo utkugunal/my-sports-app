@@ -10,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     font-family: system-ui;
+
   }
 
   h1 {
@@ -57,10 +58,20 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .demo-app-sidebar {
-    width: 30%;
-    line-height: 1.5;
-    background: #eaf9ff;
-    border-right: 1px solid #d3e2e8;
+  flex-grow: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: top; */
+  line-height: 1.5;
+  background: #eaf9ff;
+  border-right: 1px solid #d3e2e8;
+
+  @media (max-width: 768px) { /* Adjust breakpoint as needed */
+    height: auto;
+    flex-grow: 0;
+  }
+
   }
 
   .demo-app-sidebar-section {

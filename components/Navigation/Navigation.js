@@ -1,5 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
+import { FaPlus, FaCalendarAlt, FaHome, FaHeart } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 const NavBar = styled.nav`
   font-size: 1.3rem;
@@ -19,13 +21,38 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
+const IconLink = styled.a`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: ${(props) => (props.isActive ? "#fff" : "#000")};
+  background-color: ${(props) => (props.isActive ? "#000" : "#fff")};
+  padding: 5px;
+  margin: 0 20px;
+  border-radius: 5px;
+  svg {
+    font-size: 24px;
+  }
+`;
+
 export default function Navigation() {
+  const router = useRouter();
+
+  const isActive = (pathname) => router.pathname === pathname;
   return (
     <NavBar>
-      <StyledLink href={"/add"}>Add</StyledLink>
-      <StyledLink href={"/calendar"}>MyP</StyledLink>
-      <StyledLink href={"/"}>Home</StyledLink>
-      <StyledLink href={"/favorites"}>Fav</StyledLink>
+      <IconLink href="/add" isActive={isActive("/add")}>
+        <FaPlus />
+      </IconLink>
+      <IconLink href="/calendar" isActive={isActive("/calendar")}>
+        <FaCalendarAlt />
+      </IconLink>
+      <IconLink href="/" isActive={isActive("/")}>
+        <FaHome />
+      </IconLink>
+      <IconLink href="/favorites" isActive={isActive("/favorites")}>
+        <FaHeart />
+      </IconLink>
     </NavBar>
   );
 }

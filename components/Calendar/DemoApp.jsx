@@ -8,6 +8,34 @@ import "@/styles/styles";
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import styled from "styled-components";
+
+const AppContainer = styled.div`
+  display: flex;
+
+  @media (max-width: 768px) {
+    /* Adjust the breakpoint as needed */
+    flex-direction: column-reverse;
+  }
+`;
+
+const CalendarContainer = styled.div`
+  flex: 1;
+
+  @media (max-width: 768px) {
+    /* Adjust styles for mobile view */
+  }
+`;
+
+const Sidebar = styled.div`
+  width: 250px; /* Adjust width as needed */
+  /* Other styles for the sidebar */
+
+  @media (max-width: 768px) {
+    width: 100%;
+    /* Other styles for mobile view */
+  }
+`;
 
 export default function DemoApp() {
   const [currentEvents, setCurrentEvents] = useState([]);
@@ -15,6 +43,8 @@ export default function DemoApp() {
 
   const { data: session } = useSession();
   const { data: record, isLoading, error, mutate } = useSWR(`/api/calendar/`);
+
+  const Sidebar = styled.div``;
 
   const router = useRouter();
 
@@ -145,7 +175,7 @@ export default function DemoApp() {
   );
 
   const renderSidebar = () => (
-    <div className="demo-app-sidebar">
+    <Sidebar className="demo-app-sidebar">
       <div className="demo-app-sidebar-section">
         <h2>Instructions</h2>
         <ul>
@@ -161,18 +191,17 @@ export default function DemoApp() {
         {/* <h2>All Events ({currentEvents.length})</h2>
         <ul>{currentEvents.map(renderSidebarEvent)}</ul> */}
         <h2>My Progress</h2>
-
         <li>
           <b>{recordMonthly.length}</b> activities in <b>December</b> 2023.
         </li>
       </div>
-    </div>
+    </Sidebar>
   );
 
   return (
-    <div className="demo-app">
-      {renderSidebar()}
-      <div className="demo-app-main">
+    <AppContainer className="demo-app">
+      <Sidebar>{renderSidebar()}</Sidebar>
+      <CalendarContainer className="demo-app-main">
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           headerToolbar={{
@@ -192,7 +221,7 @@ export default function DemoApp() {
           eventClick={handleEventClick}
           eventsSet={handleEvents}
         />
-      </div>
-    </div>
+      </CalendarContainer>
+    </AppContainer>
   );
 }

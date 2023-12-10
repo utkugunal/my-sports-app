@@ -12,7 +12,7 @@ const Header = styled.header`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  border-bottom: 2px solid black;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 `;
 
 export default function Layout({ children }) {
