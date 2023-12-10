@@ -15,7 +15,8 @@ export const Input = styled.input`
   font-size: inherit;
   border: 1px solid black;
   border-radius: 0.5rem;
-  width: 30%;
+  min-width: 250px;
+  height: 30px;
 `;
 
 export const Textarea = styled.textarea`
