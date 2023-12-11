@@ -2,6 +2,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import { FaPlus, FaCalendarAlt, FaHome, FaHeart } from "react-icons/fa";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 const NavBar = styled.nav`
   font-size: 1.3rem;
@@ -36,23 +37,30 @@ const IconLink = styled.a`
 `;
 
 export default function Navigation() {
+  const { data: session } = useSession();
   const router = useRouter();
 
   const isActive = (pathname) => router.pathname === pathname;
   return (
     <NavBar>
-      <IconLink href="/add" isActive={isActive("/add")}>
-        <FaPlus />
-      </IconLink>
-      <IconLink href="/calendar" isActive={isActive("/calendar")}>
-        <FaCalendarAlt />
-      </IconLink>
+      {session && (
+        <IconLink href="/add" isActive={isActive("/add")}>
+          <FaPlus />
+        </IconLink>
+      )}
+      {session && (
+        <IconLink href="/calendar" isActive={isActive("/calendar")}>
+          <FaCalendarAlt />
+        </IconLink>
+      )}
       <IconLink href="/" isActive={isActive("/")}>
         <FaHome />
       </IconLink>
-      <IconLink href="/favorites" isActive={isActive("/favorites")}>
-        <FaHeart />
-      </IconLink>
+      {session && (
+        <IconLink href="/favorites" isActive={isActive("/favorites")}>
+          <FaHeart />
+        </IconLink>
+      )}
     </NavBar>
   );
 }

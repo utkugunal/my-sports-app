@@ -41,10 +41,9 @@ const Dropdown = styled.ul`
   padding-right: 10px;
   display: ${(props) => (props.show ? "block" : "none")};
   background-color: white;
-  /* border-bottom: 2px solid black; */
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-
-  /* border-right: 2px solid black; */
+  border-bottom: 2px solid black;
+  /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); */
+  border-right: 2px solid black;
   padding-top: 10px;
   margin-top: -5px;
   z-index: 10;
@@ -52,6 +51,8 @@ const Dropdown = styled.ul`
 
 export default function NavBarTop() {
   const [showDropdown, setShowDropdown] = useState(false);
+  const { data: session } = useSession();
+
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -60,8 +61,8 @@ export default function NavBarTop() {
     <Nav>
       <HamburgerMenu onClick={toggleDropdown}>☰</HamburgerMenu>
       <Dropdown show={showDropdown}>
-        <NavItem onClick={() => signIn()}>Sign In</NavItem>
-        <NavItem onClick={() => signOut()}>Sign Out</NavItem>
+        {!session && <NavItem onClick={() => signIn()}>Sign In</NavItem>}
+        {session && <NavItem onClick={() => signOut()}>Sign Out</NavItem>}
       </Dropdown>
     </Nav>
   );

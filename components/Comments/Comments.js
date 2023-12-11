@@ -2,26 +2,37 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import styled from "styled-components";
 import { useSession } from "next-auth/react";
+import { StyledButton } from "../StyledButton/StyledButton";
+import { Input } from "../Form/Form";
 
 const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-left: 40px;
 `;
 
 const List = styled.ul`
   list-style-type: none;
-  margin-bottom: 40px;
+  margin-bottom: 45px;
   margin-left: 15px;
 `;
 
 const ListItem = styled.li`
   margin-left: 20px;
-  margin-top: 5px;
+
+  margin-top: 15px;
+  margin-bottom: 15px;
 `;
 
 const NoCommentListItem = styled(ListItem)`
   text-align: center;
   margin-left: 100px;
   font-style: italic;
+`;
+
+const NewCommentContainer = styled.div`
+  margin-bottom: 15px;
 `;
 
 export default function Comments({ comments }) {
@@ -77,15 +88,11 @@ export default function Comments({ comments }) {
       </>
       {session && (
         <Form onSubmit={handleSubmitComment}>
-          {/* <div>
-          <label htmlFor="username">Your name: </label>
-          <input type="text" name="username"></input>
-        </div> */}
-          <div>
-            <label htmlFor="comment">Add comment: </label>
-            <input type="text" name="comment"></input>
-          </div>
-          <button type="submit">Add</button>
+          <NewCommentContainer>
+            <label htmlFor="comment">New comment: </label>
+            <Input type="text" name="comment"></Input>
+          </NewCommentContainer>
+          <StyledButton type="submit">Add comment</StyledButton>
         </Form>
       )}
     </div>
