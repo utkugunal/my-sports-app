@@ -5,6 +5,7 @@ import SportVenuePreview from "../../../../components/SportVenuePreview/SportVen
 import Image from "next/image";
 import Comments from "../../../../components/Comments/Comments";
 import styled from "styled-components";
+import { IoArrowBack } from "react-icons/io5";
 
 const CenteredContainer = styled.div`
   display: flex;
@@ -21,13 +22,25 @@ const LeanLeftContainer = styled.div`
 const MapContainer = styled.div`
   display: flex;
   column-gap: 10px;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-left: 40px;
   margin-bottom: 20px;
 `;
 
 const DirectionText = styled.p`
   margin-top: 0px;
+`;
+
+const BackIconContainer = styled.div`
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 25%;
+  background-color: #fff;
+  border: 1px solid black;
 `;
 
 export default function DetailsPage({ handleToggleFavorite, favorites }) {
@@ -42,7 +55,14 @@ export default function DetailsPage({ handleToggleFavorite, favorites }) {
 
   return (
     <CenteredContainer>
-      <Link href="/"> &larr; Back</Link>
+      <BackIconContainer>
+        <Link href="/">
+          {" "}
+          <a style={{ display: "flex", alignItems: "center", color: "black" }}>
+            <IoArrowBack size={30} />
+          </a>
+        </Link>
+      </BackIconContainer>
       <LeanLeftContainer>
         <SportVenuePreview
           image={venue.imageURL}

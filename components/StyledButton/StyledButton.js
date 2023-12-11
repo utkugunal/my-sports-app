@@ -11,6 +11,8 @@ export const StyledButton = styled.button`
   border: none;
   font-size: inherit;
   height: 40px;
+  margin-top: 15px;
+  margin-bottom: 20px;
 
   ${({ variant }) =>
     variant === "delete" &&

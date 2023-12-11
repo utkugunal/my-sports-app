@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import styled, { css } from "styled-components";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
+import { useSession } from "next-auth/react";
 
 const Figure = styled.figure`
   display: flex;
@@ -23,13 +24,17 @@ export default function SportVenuePreview({
   isFavorite,
   imageSize = { width: 300, height: 150 }, // apparently it is possible to create a prop as an object...
 }) {
+  const { data: session } = useSession();
+
   return (
     <Figure>
-      <FavoriteButton
-        id={id}
-        onToggle={handleToggleFavorite}
-        isFavorite={isFavorite}
-      />
+      {session && (
+        <FavoriteButton
+          id={id}
+          onToggle={handleToggleFavorite}
+          isFavorite={isFavorite}
+        />
+      )}
       <Link href={`/venues/${id}`}>
         <Image
           src={image}
