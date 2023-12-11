@@ -40,6 +40,7 @@ export default function Form({ onSubmit, formName }) {
     console.log(data);
     onSubmit(data);
     event.target.reset();
+    alert("New venue is successfully added!");
     router.reload();
   }
 
@@ -85,7 +86,7 @@ export default function Form({ onSubmit, formName }) {
         required
         // defaultValue={defaultData?.mapURL}
       />
-      <StyledButton type="submit">Add place</StyledButton>
+      <StyledButton type="submit">Add venue</StyledButton>
     </FormContainer>
   );
 }
