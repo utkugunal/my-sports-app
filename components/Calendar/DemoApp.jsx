@@ -14,7 +14,6 @@ const AppContainer = styled.div`
   display: flex;
 
   @media (max-width: 768px) {
-    /* Adjust the breakpoint as needed */
     flex-direction: column-reverse;
   }
 `;
@@ -23,17 +22,14 @@ const CalendarContainer = styled.div`
   flex: 1;
 
   @media (max-width: 768px) {
-    /* Adjust styles for mobile view */
   }
 `;
 
 const Sidebar = styled.div`
-  width: 250px; /* Adjust width as needed */
-  /* Other styles for the sidebar */
+  width: 250px;
 
   @media (max-width: 768px) {
     width: 100%;
-    /* Other styles for mobile view */
   }
 `;
 
@@ -62,7 +58,7 @@ export default function DemoApp() {
 
   console.log("record variable: ", record);
 
-  const recordMonthly = record?.filter((r) => r.start.startsWith("2023-12"));
+  const recordMonthly = record?.filter((r) => r.start.startsWith("2024-01"));
   console.log("====recordMonthly:", recordMonthly);
 
   function createEventId() {
@@ -104,7 +100,7 @@ export default function DemoApp() {
       console.log("INPUT!!!!!", input);
 
       if (response.ok) {
-        await mutate(); // Wait for the mutate to complete
+        await mutate();
         router.reload();
       }
     }
@@ -128,7 +124,6 @@ export default function DemoApp() {
             clickInfo.event._def.extendedProps._id
           );
           console.log("==== clickInfo.event._def: ", clickInfo.event._def);
-          // Remove the event from the calendar
           clickInfo.event.remove();
         } else {
           console.error("Failed to delete the event from the database.");
@@ -161,18 +156,18 @@ export default function DemoApp() {
     );
   };
 
-  const renderSidebarEvent = (event) => (
-    <li key={event.id}>
-      <b>
-        {formatDate(event.start, {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        })}
-      </b>
-      <i>{event.title}</i>
-    </li>
-  );
+  // const renderSidebarEvent = (event) => (
+  //   <li key={event.id}>
+  //     <b>
+  //       {formatDate(event.start, {
+  //         year: "numeric",
+  //         month: "short",
+  //         day: "numeric",
+  //       })}
+  //     </b>
+  //     <i>{event.title}</i>
+  //   </li>
+  // );
 
   const renderSidebar = () => (
     <Sidebar className="demo-app-sidebar">
@@ -192,7 +187,7 @@ export default function DemoApp() {
         <ul>{currentEvents.map(renderSidebarEvent)}</ul> */}
         <h2>My Progress</h2>
         <li>
-          <b>{recordMonthly.length}</b> activities in <b>December</b> 2023.
+          <b>{recordMonthly.length}</b> activities in <b>January</b> 2024.
         </li>
       </div>
     </Sidebar>

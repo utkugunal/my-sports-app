@@ -47,45 +47,15 @@ export default function Form({ onSubmit, formName }) {
   return (
     <FormContainer aria-labelledby={formName} onSubmit={handleSubmit}>
       <Label htmlFor="name">Venue Name</Label>
-      <Input
-        id="name"
-        name="name"
-        type="text"
-        required
-        // defaultValue={defaultData?.name}
-      />
+      <Input id="name" name="name" type="text" required />
       <Label htmlFor="category">Sport Category</Label>
-      <Input
-        id="category"
-        name="category"
-        type="text"
-        required
-        // defaultValue={defaultData?.category}
-      />
+      <Input id="category" name="category" type="text" required />
       <Label htmlFor="image-url">Image Url</Label>
-      <Input
-        id="image-url"
-        name="imageURL"
-        type="text"
-        required
-        // defaultValue={defaultData?.imageURL}
-      />
+      <Input id="image-url" name="imageURL" type="text" required />
       <Label htmlFor="district">District</Label>
-      <Input
-        id="district"
-        name="district"
-        type="text"
-        required
-        // defaultValue={defaultData?.district}
-      />
+      <Input id="district" name="district" type="text" required />
       <Label htmlFor="map-url">Map Url</Label>
-      <Input
-        id="map-url"
-        name="mapURL"
-        type="text"
-        required
-        // defaultValue={defaultData?.mapURL}
-      />
+      <Input id="map-url" name="mapURL" type="text" required />
       <StyledButton type="submit">Add venue</StyledButton>
     </FormContainer>
   );

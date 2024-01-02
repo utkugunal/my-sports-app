@@ -9,8 +9,6 @@ const Figure = styled.figure`
   flex-direction: column;
   margin-bottom: 20px;
   margin-top: 20px;
-  /* font-family: Monospace; */
-
   font-size: 0.9rem;
 `;
 
@@ -22,7 +20,7 @@ export default function SportVenuePreview({
   venueCategory,
   handleToggleFavorite,
   isFavorite,
-  imageSize = { width: 300, height: 150 }, // apparently it is possible to create a prop as an object...
+  imageSize = { width: 300, height: 150 },
 }) {
   const { data: session } = useSession();
 

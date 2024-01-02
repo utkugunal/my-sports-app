@@ -10,7 +10,7 @@ const NavBar = styled.nav`
   justify-content: space-evenly;
   position: fixed;
   width: 100%;
-  bottom: 0; /* Stick to the bottom */
+  bottom: 0;
   background-color: #fff;
   padding: 10px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
