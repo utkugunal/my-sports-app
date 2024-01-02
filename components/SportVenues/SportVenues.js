@@ -10,8 +10,6 @@ const List = styled.ul`
   flex-wrap: wrap;
   justify-content: center;
 `;
-// const MainContainer = styled.div`
-// `;
 
 export default function SportVenues({
   venues,

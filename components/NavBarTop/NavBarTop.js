@@ -42,7 +42,6 @@ const Dropdown = styled.ul`
   display: ${(props) => (props.show ? "block" : "none")};
   background-color: white;
   border-bottom: 2px solid black;
-  /* box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); */
   border-right: 2px solid black;
   padding-top: 10px;
   margin-top: -5px;

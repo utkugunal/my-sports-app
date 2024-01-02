@@ -13,14 +13,6 @@ export default function App({ Component, pageProps, session }) {
   const [favoriteInfo, setFavoriteInfo] = useLocalStorageState("favoriteInfo", {
     defaultValue: [],
   });
-
-  // const [currentEvents, setCurrentEvents] = useLocalStorageState(
-  //   "eventStorage",
-  //   {
-  //     defaultValue: [],
-  //   }
-  // );
-
   if (error) return <div>{error.message}</div>;
   if (isLoading) return <div>loading...</div>;
   if (!data) return;
@@ -42,25 +34,25 @@ export default function App({ Component, pageProps, session }) {
   }
   console.log("favoriteInfo state:", favoriteInfo);
   return (
-    <SessionProvider session={session}>
-      <SWRConfig
-        value={{
-          fetcher,
-          refreshInterval: 1000,
-        }}
-      >
-        <Layout>
-          <GlobalStyle />
-          <Component
-            {...pageProps}
-            venues={data}
-            handleToggleFavorite={handleToggleFavorite}
-            favorites={favoriteInfo}
-            // currentEvents={currentEvents}
-            // setCurrentEvents={setCurrentEvents}
-          />
-        </Layout>
-      </SWRConfig>
-    </SessionProvider>
+    <>
+      <SessionProvider session={session}>
+        <GlobalStyle />
+        <SWRConfig
+          value={{
+            fetcher,
+            refreshInterval: 1000,
+          }}
+        >
+          <Layout>
+            <Component
+              {...pageProps}
+              venues={data}
+              handleToggleFavorite={handleToggleFavorite}
+              favorites={favoriteInfo}
+            />
+          </Layout>
+        </SWRConfig>
+      </SessionProvider>
+    </>
   );
 }

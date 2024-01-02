@@ -20,7 +20,6 @@ const List = styled.ul`
 
 const ListItem = styled.li`
   margin-left: 20px;
-
   margin-top: 15px;
   margin-bottom: 15px;
 `;
@@ -33,6 +32,10 @@ const NoCommentListItem = styled(ListItem)`
 
 const NewCommentContainer = styled.div`
   margin-bottom: 15px;
+`;
+
+const CenteredButton = styled(StyledButton)`
+  margin-left: 35px;
 `;
 
 export default function Comments({ comments }) {
@@ -70,8 +73,8 @@ export default function Comments({ comments }) {
   const formattedDate = currentDate.toLocaleString(undefined, options);
 
   return (
-    <div>
-      <>
+    <>
+      <div>
         <List>
           Comments:
           {comments && comments.length > 0 ? (
@@ -85,16 +88,18 @@ export default function Comments({ comments }) {
             <NoCommentListItem>There is no comment yet.</NoCommentListItem>
           )}
         </List>
-      </>
-      {session && (
-        <Form onSubmit={handleSubmitComment}>
-          <NewCommentContainer>
-            <label htmlFor="comment">New comment: </label>
-            <Input type="text" name="comment"></Input>
-          </NewCommentContainer>
-          <StyledButton type="submit">Add comment</StyledButton>
-        </Form>
-      )}
-    </div>
+      </div>
+      <div>
+        {session && (
+          <Form onSubmit={handleSubmitComment}>
+            <NewCommentContainer>
+              <label htmlFor="comment">New comment: </label>
+              <Input type="text" name="comment"></Input>
+            </NewCommentContainer>
+            <CenteredButton type="submit">Add comment</CenteredButton>
+          </Form>
+        )}
+      </div>
+    </>
   );
 }

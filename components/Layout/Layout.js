@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Navigation from "../Navigation/Navigation";
 import "@/styles/styles";
-import { useState } from "react";
 import NavBarTop from "../NavBarTop/NavBarTop";
 
 const ContentContainer = styled.main`
@@ -13,6 +12,7 @@ const Header = styled.header`
   flex-direction: row;
   justify-content: space-evenly;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  width: 100%;
 `;
 
 export default function Layout({ children }) {

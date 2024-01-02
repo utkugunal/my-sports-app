@@ -1,16 +1,14 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
-  *,
-  *::before,
-  *::after {
+  * {
     box-sizing: border-box;
+
   }
 
   body {
     margin: 0;
     font-family: system-ui;
-
   }
 
   h1 {
@@ -20,11 +18,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   html,
-
-  
   body,
   body > div {
-    /* the react root */
     margin: 0;
     padding: 0;
     height: 100%;
@@ -39,17 +34,6 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0 0 0 1.5em;
   }
-
-  /* li {
-    margin: 1.5em 0;
-    padding: 0;
-  } */
-
-  b {
-    /* used for event dates/times */
-    /* margin-right: 3px; */
-  }
-
   .demo-app {
     display: flex;
     min-height: 100%;
@@ -62,16 +46,14 @@ export const GlobalStyle = createGlobalStyle`
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* justify-content: top; */
   line-height: 1.5;
   background: #eaf9ff;
   border-right: 1px solid #d3e2e8;
 
-  @media (max-width: 768px) { /* Adjust breakpoint as needed */
+  @media (max-width: 768px) {
     height: auto;
     flex-grow: 0;
   }
-
   }
 
   .demo-app-sidebar-section {
@@ -84,7 +66,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .fc {
-    /* the calendar root */
     max-width: 1100px;
     margin: 0 auto;
   }
